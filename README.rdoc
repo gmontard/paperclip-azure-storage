@@ -1,0 +1,54 @@
+= Paperclip storage lib to save file to Windows Azure (CDN)
+
+=== Requirements
+This lib file is here for example, then you can adapt it to your own usage.
+This is a simple storage lib for Paperclip, it works well on paperclip 2.3 with Rails 2.3.14, and should be easy to port to Rails 3 + Paperclip 3.
+
+To make it works you need to add this gem
+  gem "waz-storage"
+
+Also you need a config/azure.yml to hold your Azure credentials
+  # development:
+  #   account_name: account
+  #   access_key: key
+  # 
+  # staging:
+  #   account_name: account
+  #   access_key: key
+  #       
+  # production:
+  #   account_name: account
+  #   access_key: key
+
+There is two module (Azure1 && Azure2), let me explain both solutions.
+
+=== Module Azure1
+
+This module works great and doesn't require many change in your app, almost none, to use Windows Azure CDN as your paperclip storage.
+I let you take a look at the code, but there is one thing you can't do with this module, using custom CDN CNAME and HTTPS.
+
+==== Why ?
+
+For now, and it seems it won't change anytime soon, Windows Azure doesn't give you the ability to use the CDN URL with your custom CNAME on HTTPS protocol.
+
+The solution will be to use the blob URL when using HTTPS, and the CDN URL when using HTTP.
+
+Sadly it's impossible to have a proper way to do that with paperclip (you can google it if you want), here is why there is a Module Azure2 !!
+
+=== Module Azure2
+
+This module is here to paliate the problem exposed before.
+
+To do that, we are going to use the CDN for HTTP and local server file for HTTPS request. Rails asset_host will help us to do that.
+
+The downside of this approch, you need all your assets (js, images, css) to live on Azure CDN + Local File. I don't think it's a big drawback since it will speed up your website but for some it could be. Also you will have all your paperclip assets on you localfile systeme too (good thing !).
+
+To sync all your /public assets I invite you to take a look at my gem "waz-sync" here : https://github.com/gmontard/waz-syncs
+
+=== Meta
+
+Written by Guillaume Montard
+
+Released under the MIT License: http://www.opensource.org/licenses/mit-license.php
+
+https://github.com/gmontard/paperclip-azure-storage

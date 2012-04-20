@@ -1,2 +1,0 @@
-paperclip-azure-storage
-=======================
