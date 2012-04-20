@@ -61,7 +61,7 @@ module Paperclip
 
         base.instance_eval do
           @azure_credentials = parse_credentials(@options[:azure_credentials])
-          @container         = @options[:container] || @azure_credentials[:container]
+          @container         = @options[:azure_container] || @azure_credentials[:azure_container]
           @account_name      = @azure_credentials[:account_name]          
           @azure_host_alias  = @options[:azure_host_alias]
           @url               = ":azure_host_alias"
@@ -226,7 +226,7 @@ module Paperclip
 
         base.instance_eval do
           @azure_credentials = parse_credentials(@options[:azure_credentials])
-          @container         = @options[:container] || @azure_credentials[:container]
+          @container         = @options[:azure_container] || @azure_credentials[:azure_container]
           WAZ::Storage::Base.establish_connection!(:account_name => @azure_credentials[:account_name], :access_key => @azure_credentials[:access_key])
         end
       end
