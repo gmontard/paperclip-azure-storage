@@ -132,7 +132,7 @@ module Paperclip
             log("error saving to Azure #{path(style)}")            
             ## If container doesn't exist we create it
             if WAZ::Blobs::Container.find(container_name).blank?
-              WAZ::Blobs::Container.create(container).public_access = "blob"
+              WAZ::Blobs::Container.create(container_name).public_access = "blob"
               log("retryng saving to Azure #{path(style)}")            
               retry
             end
@@ -276,7 +276,7 @@ module Paperclip
             log("error saving to Azure #{path(style)}")            
             ## If container doesn't exist we create it
             if WAZ::Blobs::Container.find(container_name).blank?
-              WAZ::Blobs::Container.create(container).public_access = "blob"
+              WAZ::Blobs::Container.create(container_name).public_access = "blob"
               log("retryng saving to Azure #{path(style)}")            
               retry
             end
