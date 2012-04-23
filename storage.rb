@@ -199,7 +199,7 @@ module Paperclip
       #         :azure_credentials => "#{RAILS_ROOT}/config/azure.yml",
       #         :azure_container   => "system",
       #         :path              => "datadb/:modelname/:attachment/:id/:style/:filename",
-      #         :url               => '/system/:path'
+      #         :url               => '/system/datadb/:modelname/:attachment/:id/:style/:filename'
       #       }
       #     end    
       #   end
