@@ -127,7 +127,7 @@ module Paperclip
         @queued_for_write.each do |style, file|
           begin
             log("saving to Azure #{path(style)}")      
-            WAZ::Blobs::Container.find(container_name).store(path(style), file.read, instance_read(:content_type))
+            WAZ::Blobs::Container.find(container_name).store(path(style), file.read, instance_read(:content_type), {:x_ms_blob_cache_control=>"max-age=315360000, public"})
           rescue
             log("error saving to Azure #{path(style)}")            
             ## If container doesn't exist we create it
@@ -271,7 +271,7 @@ module Paperclip
         @queued_for_write.each do |style, file|
           begin
             log("saving to Azure #{path(style)}")      
-            WAZ::Blobs::Container.find(container_name).store(path(style), file.read, instance_read(:content_type))
+            WAZ::Blobs::Container.find(container_name).store(path(style), file.read, instance_read(:content_type), {:x_ms_blob_cache_control=>"max-age=315360000, public"})
           rescue
             log("error saving to Azure #{path(style)}")            
             ## If container doesn't exist we create it
