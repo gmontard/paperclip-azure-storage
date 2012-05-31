@@ -117,9 +117,12 @@ module Paperclip
       # style, in the format most representative of the current storage.
       def to_file style = default_style
         return @queued_for_write[style] if @queued_for_write[style]
-        file = Tempfile.new(path(style))
-        file.write(WAZ::Blobs::Container.find(container_name)[path(style)].value)
-        file.rewind
+        if exists?(style)
+          file = Tempfile.new(path(style)) 
+          file.write(WAZ::Blobs::Container.find(container_name)[path(style)].value)
+          file.rewind
+          file
+        end
         return file
       end
 
@@ -261,9 +264,12 @@ module Paperclip
       # style, in the format most representative of the current storage.
       def to_file style = default_style
         return @queued_for_write[style] if @queued_for_write[style]
-        file = Tempfile.new(path(style))
-        file.write(WAZ::Blobs::Container.find(container_name)[path(style)].value)
-        file.rewind
+        if exists?(style)
+          file = Tempfile.new(path(style)) 
+          file.write(WAZ::Blobs::Container.find(container_name)[path(style)].value)
+          file.rewind
+          file
+        end
         return file
       end
 
