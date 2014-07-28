@@ -104,7 +104,7 @@ module Paperclip
       def exists?(style = default_style)
         if original_filename
           begin
-            AZ::Blobs::Container.find(container_name)[path(style)]
+            WAZ::Blobs::Container.find(container_name)[path(style)]
           rescue
             false
           end
